@@ -1,0 +1,17 @@
+:root {
+  --color-red: #e63946;
+  --color-blue-300: #f1faee;
+  --color-blue-500: #a8dadc;
+  --color-blue-700: #457b9d;
+  --color-blue-900: #1d3557;
+  --color-white: #fff;
+  --color-black: #000;
+
+  --color-background: var(--color-white);
+  --color-text: var(--color-black);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}

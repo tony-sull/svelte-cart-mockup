@@ -14,6 +14,7 @@ specifiers:
   rollup-plugin-livereload: ^2.0.0
   rollup-plugin-svelte: ^7.0.0
   rollup-plugin-terser: ^7.0.0
+  sanitize.css: ^12.0.1
   sirv-cli: ^1.0.0
   svelte: ^3.0.0
   svelte-check: ^1.0.0
@@ -40,6 +41,7 @@ devDependencies:
   rollup-plugin-livereload: 2.0.0
   rollup-plugin-svelte: 7.1.0_rollup@2.47.0+svelte@3.38.2
   rollup-plugin-terser: 7.0.2_rollup@2.47.0
+  sanitize.css: 12.0.1
   svelte: 3.38.2
   svelte-check: 1.5.3_svelte@3.38.2
   svelte-jester: 1.5.0_svelte@3.38.2
@@ -3565,6 +3567,10 @@ packages:
       micromatch: 3.1.10
       minimist: 1.2.5
       walker: 1.0.7
+    dev: true
+
+  /sanitize.css/12.0.1:
+    resolution: {integrity: sha512-QbusSBnWHaRBZeTxsJyknwI0q+q6m1NtLBmB76JfW/rdVN7Ws6Zz70w65+430/ouVcdNVT3qwrDgrM6PaYyRtw==}
     dev: true
 
   /saxes/5.0.1:
