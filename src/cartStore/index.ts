@@ -3,9 +3,11 @@ import { getItemsCount } from './getItemsCount'
 import { getTotalPrice } from './getTotalPrice'
 
 type CartItem = {
-    variant: ItemVariant,
-    item: StoreItem,
+    brand: string
+    title: string
+    description: string
     quantity: number
+    itemPrice: number
 }
 
 export type CartState = {
