@@ -42,6 +42,12 @@
     border: none;
     padding: 0.5em;
     margin-right: -0.5em; /* visually align the icon's right edge */
+    will-change: opacity, color;
+    transition: opacity 150ms ease-out, color 150ms ease-out;
+  }
+
+  button:hover {
+    color: var(--color-blue-700);
   }
 
   button :global(svg) {
