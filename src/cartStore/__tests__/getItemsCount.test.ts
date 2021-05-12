@@ -12,6 +12,7 @@ test('should return the quantity of a single cart item', () => {
     const state: CartState = {
         items: [
             {
+                sku: 'overside-blazer-bl-36',
                 brand: 'Test Brand',
                 title: 'Oversize Blazer',
                 description: 'Black, size: 36',
@@ -29,6 +30,7 @@ test('should return the total quantity of multiple cart items', () => {
     const state: CartState = {
         items: [
             {
+                sku: 'overside-blazer-bl-36',
                 brand: 'Test Brand',
                 title: 'Oversize Blazer',
                 description: 'Black, size: 36',
@@ -36,6 +38,7 @@ test('should return the total quantity of multiple cart items', () => {
                 itemPrice: 75
             },
             {
+                sku: 'undersize-blazer-bl-36',
                 brand: 'Test Brand',
                 title: 'Undersize Blazer',
                 description: 'Black, size: 36',
@@ -53,6 +56,7 @@ test('should ignore items with an invalid quantity', () => {
     const state: CartState = {
         items: [
             {
+                sku: 'overside-blazer-bl-36',
                 brand: 'Test Brand',
                 title: 'Oversize Blazer',
                 description: 'Black, size: 36',
@@ -60,6 +64,7 @@ test('should ignore items with an invalid quantity', () => {
                 itemPrice: 75
             },
             {
+                sku: 'undersize-blazer-bl-36',
                 brand: 'Test Brand',
                 title: 'Undersize Blazer',
                 description: 'Black, size: 36',

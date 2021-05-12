@@ -3,6 +3,7 @@ import { getItemsCount } from './getItemsCount'
 import { getTotalPrice } from './getTotalPrice'
 
 type CartItem = {
+    sku: string
     brand: string
     title: string
     description: string
@@ -32,6 +33,7 @@ function createStore(initialState: CartState = defaultState()) {
 
     return {
         subscribe,
+        update,
         reset,
         itemsCount,
         totalPrice
