@@ -1,0 +1,66 @@
+:root {
+  --color-red: #e63946;
+  --color-blue-300: #f1faee;
+  --color-blue-500: #a8dadc;
+  --color-blue-700: #457b9d;
+  --color-blue-900: #1d3557;
+  --color-white: #fff;
+  --color-black: #000;
+
+  --color-background: var(--color-white);
+  --color-text: var(--color-black);
+}
+
+/* Reduce font for very small phones, ex: iPhone 5 */
+body {
+  font-size: 14px;
+}
+
+a {
+  color: inherit;
+}
+
+svg {
+  stroke: currentColor;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  padding: 0.5em;
+  border-radius: 0.25em;
+}
+
+.btn.btn--icon svg {
+  height: 2em;
+}
+
+@media (min-width: 375px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 18px;
+  }
+}
