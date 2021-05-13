@@ -75,6 +75,115 @@
           </svg>
         </button>
       </li>
+
+      <li class="item">
+        <img
+          class="item__image"
+          src="/products/oversized-blazer.jpg"
+          alt="Oversized Blazer"
+        />
+        <small class="item__brand">Johnells</small>
+        <div class="item__title text-lg">Oversized Blazer</div>
+        <em class="item__options text-sm">Black, Size: 36</em>
+        <div class="item__quantity">
+          <NumberSpinner value={1} />
+        </div>
+        <div class="item__price">1750 SEK</div>
+
+        <button class="item__delete btn btn--icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-trash-2"
+          >
+            <polyline points="3 6 5 6 21 6" />
+            <path
+              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+            />
+            <line x1="10" y1="11" x2="10" y2="17" />
+            <line x1="14" y1="11" x2="14" y2="17" />
+          </svg>
+        </button>
+      </li>
+      <li class="item">
+        <img
+          class="item__image"
+          src="/products/oversized-blazer.jpg"
+          alt="Oversized Blazer"
+        />
+        <small class="item__brand">Johnells</small>
+        <div class="item__title text-lg">Oversized Blazer</div>
+        <em class="item__options text-sm">Black, Size: 36</em>
+        <div class="item__quantity">
+          <NumberSpinner value={1} />
+        </div>
+        <div class="item__price">1750 SEK</div>
+
+        <button class="item__delete btn btn--icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-trash-2"
+          >
+            <polyline points="3 6 5 6 21 6" />
+            <path
+              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+            />
+            <line x1="10" y1="11" x2="10" y2="17" />
+            <line x1="14" y1="11" x2="14" y2="17" />
+          </svg>
+        </button>
+      </li>
+      <li class="item">
+        <img
+          class="item__image"
+          src="/products/oversized-blazer.jpg"
+          alt="Oversized Blazer"
+        />
+        <small class="item__brand">Johnells</small>
+        <div class="item__title text-lg">Oversized Blazer</div>
+        <em class="item__options text-sm">Black, Size: 36</em>
+        <div class="item__quantity">
+          <NumberSpinner value={1} />
+        </div>
+        <div class="item__price">1750 SEK</div>
+
+        <button class="item__delete btn btn--icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-trash-2"
+          >
+            <polyline points="3 6 5 6 21 6" />
+            <path
+              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+            />
+            <line x1="10" y1="11" x2="10" y2="17" />
+            <line x1="14" y1="11" x2="14" y2="17" />
+          </svg>
+        </button>
+      </li>
     </ul>
 
     <div class="discount">
@@ -120,15 +229,20 @@
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    overflow-y: scroll;
   }
 
   header {
+    background: var(--color-background);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
     border-bottom: solid 1px var(--color-light-gray);
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 
   header h1 {
