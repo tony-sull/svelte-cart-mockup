@@ -100,9 +100,9 @@ button {
 
 .btn {
   background: transparent;
-  border: none;
-  padding: 0.5em;
+  border: solid 2px transparent;
   border-radius: 0.25em;
+  padding: 0.5em;
 }
 
 .btn.btn--lg {
@@ -115,12 +115,20 @@ button {
   color: var(--color-blue-300);
 }
 
-.btn.btn--secondary {
-  background: var(--color-light-gray);
+.btn.btn--hollow {
+  border-color: var(--color-blue-700);
+}
+
+.btn.btn--icon-sm {
+  padding: 0.75em;
 }
 
 .btn.btn--icon svg {
   height: 2em;
+}
+
+.btn.btn--icon-sm svg {
+  height: 1.5em;
 }
 
 @media (min-width: 375px) {

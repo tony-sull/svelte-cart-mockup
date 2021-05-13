@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { fade, fly } from "svelte/transition";
+  import NumberSpinner from "./NumberSpinner.svelte";
   import { modalAction } from "../actions/modalAction";
 
   const dispatch = createEventDispatcher();
@@ -48,9 +49,7 @@
         <div class="item__title text-lg">Oversized Blazer</div>
         <em class="item__options text-sm">Black, Size: 36</em>
         <div class="item__quantity">
-          <button class="btn btn__icon">-</button>
-          <span>2</span>
-          <button class="btn btn__icon">+</button>
+          <NumberSpinner value={1} />
         </div>
         <div class="item__price">1750 SEK</div>
 
@@ -80,8 +79,14 @@
   </main>
 
   <footer>
+    <div class="footer__row">
+      <span>Total</span>
+      <span>1750 SEK</span>
+    </div>
     <button class="btn btn--primary btn--lg">Checkout</button>
-    <button class="btn btn--secondary btn--lg">Continue Shopping</button>
+    <button class="btn btn--hollow btn--lg" on:click={onClose}
+      >Continue Shopping</button
+    >
   </footer>
 </aside>
 
@@ -134,6 +139,7 @@
   ul {
     list-style: none;
     margin: 0;
+    padding: 0;
   }
 
   .item {
@@ -179,11 +185,23 @@
     grid-area: options;
   }
 
+  .item__quantity {
+    grid-area: quantity;
+    margin-top: 0.5rem;
+  }
+
   footer {
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
     row-gap: 0.75rem;
+    border-top: solid 1px var(--color-light-gray);
+  }
+
+  .footer__row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
   }
 
   @media (min-width: 480px) {
