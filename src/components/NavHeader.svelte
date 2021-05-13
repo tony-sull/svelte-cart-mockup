@@ -19,6 +19,9 @@
 
 <style>
   header {
+    position: sticky;
+    top: 0;
+    background: var(--color-background);
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     display: flex;
