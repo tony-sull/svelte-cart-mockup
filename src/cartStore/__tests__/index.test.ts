@@ -93,3 +93,102 @@ describe('cartStore.addItem', () => {
         expect(state.items).toEqual(testItems)
     })
 })
+
+describe('cartStore.removeSku', () => {
+    test('should be a function', () => {
+        const { removeSku } = createCartStore()
+        expect(removeSku).toBeInstanceOf(Function)
+    })
+
+    test('should not throw for an empty store', () => {
+        const { removeSku } = createCartStore()
+        expect(() => removeSku(testItems[0].sku)).not.toThrow()
+    })
+
+    test('should remove a known SKU from the cart', () => {
+        const testItem = testItems[0]
+        const store = createCartStore({
+            items: [testItem]
+        })
+
+        store.removeSku(testItem.sku)
+
+        const state = get(store)
+        expect(state.items).toEqual([])
+    })
+
+    test('should not remove other items', () => {
+        const store = createCartStore({
+            items: testItems
+        })
+
+        store.removeSku(testItems[1].sku)
+
+        const state = get(store)
+        expect(state.items).toEqual([testItems[0]])
+    })
+
+    test('should ignore unknown SKUs', () => {
+        const store = createCartStore({
+            items: testItems
+        })
+
+        store.removeSku('test-123')
+
+        const state = get(store)
+        expect(state.items).toEqual(testItems)
+    })
+})
+
+describe('cartStore.setSkuQuantity', () => {
+    test('should be a function', () => {
+        const { setSkuQuantity } = createCartStore()
+        expect(setSkuQuantity).toBeInstanceOf(Function)
+    })
+
+    test('should not throw on empty store', () => {
+        const { setSkuQuantity } = createCartStore()
+        expect(() => setSkuQuantity('test-123', 3)).not.toThrow()
+    })
+
+    test('should update a known SKU\'s quantity', () => {
+        const testItem = testItems[0]
+        const store = createCartStore({
+            items: [ testItem ]
+        })
+
+        store.setSkuQuantity(testItem.sku, 10)
+
+        const state = get(store)
+        expect(state.items).toEqual([
+            { ...testItem, quantity: 10 }
+        ])
+    })
+
+    test('should not change other SKUs', () => {
+        const store = createCartStore({
+            items: testItems
+        })
+
+        store.setSkuQuantity(testItems[1].sku, 10)
+
+        const state = get(store)
+        expect(state.items).toEqual(
+            [
+                testItems[0],
+                { ...testItems[1], quantity: 10 }
+            ]
+        )
+    })
+
+    test('should ignore unknown SKUs', () => {
+        const store = createCartStore({
+            items: testItems
+        })
+
+        store.setSkuQuantity('test-123', 10)
+
+        const state = get(store)
+        expect(state.items).toEqual(testItems)
+    })
+})
