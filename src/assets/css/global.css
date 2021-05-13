@@ -7,6 +7,8 @@
   --color-blue-700: #457b9d;
   --color-blue-900: #1d3557;
   --color-white: #fff;
+  --color-light-gray: #cecece;
+  --color-gray: #707070;
   --color-black: #000;
 
   --color-background: var(--color-white);
@@ -111,7 +113,10 @@ button {
 .btn.btn--primary {
   background: var(--color-blue-700);
   color: var(--color-blue-300);
-  font-size: ;
+}
+
+.btn.btn--secondary {
+  background: var(--color-light-gray);
 }
 
 .btn.btn--icon svg {

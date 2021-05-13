@@ -15,13 +15,14 @@
 <div class="dialog-bg" transition:fade={{ duration: 250 }} on:click={onClose} />
 <aside
   role="dialog"
+  class="container"
   use:modalAction
   aria-labelledby="cart-title"
   transition:fly={{ duration: 250, x: clientWidth }}
   bind:clientWidth
 >
   <header>
-    <h1 id="cart-title">Shopping Cart</h1>
+    <h1 id="cart-title" class="text-lg">Shopping Cart</h1>
     <button class="btn btn--icon" on:click={onClose}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -37,11 +38,51 @@
   </header>
   <main>
     <ul>
-      <li>items</li>
-      <li>go</li>
-      <li>here</li>
+      <li class="item">
+        <img
+          class="item__image"
+          src="/products/oversized-blazer.jpg"
+          alt="Oversized Blazer"
+        />
+        <small class="item__brand">Johnells</small>
+        <div class="item__title text-lg">Oversized Blazer</div>
+        <em class="item__options text-sm">Black, Size: 36</em>
+        <div class="item__quantity">
+          <button class="btn btn__icon">-</button>
+          <span>2</span>
+          <button class="btn btn__icon">+</button>
+        </div>
+        <div class="item__price">1750 SEK</div>
+
+        <button class="item__delete btn btn--icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-trash-2"
+          >
+            <polyline points="3 6 5 6 21 6" />
+            <path
+              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+            />
+            <line x1="10" y1="11" x2="10" y2="17" />
+            <line x1="14" y1="11" x2="14" y2="17" />
+          </svg>
+        </button>
+      </li>
     </ul>
   </main>
+
+  <footer>
+    <button class="btn btn--primary btn--lg">Checkout</button>
+    <button class="btn btn--secondary btn--lg">Continue Shopping</button>
+  </footer>
 </aside>
 
 <style>
@@ -63,6 +104,9 @@
     right: 0;
     width: 100%;
     max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
   }
 
   header {
@@ -70,7 +114,76 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 1rem 0;
+    border-bottom: solid 1px var(--color-light-gray);
+  }
+
+  header h1 {
+    padding: 0;
+    margin: 0;
+  }
+
+  header .btn {
+    margin-right: -0.5rem;
+  }
+
+  main {
+    flex: 1 0 0%;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "image brand delete"
+      "image title delete"
+      "image options options"
+      "image quantity price";
+    column-gap: 1rem;
+    align-items: center;
+    padding: 1rem 0;
+  }
+
+  .item:not(:last-of-type) {
+    border-bottom: solid 1px var(--color-light-gray);
+  }
+
+  .item__image {
+    grid-area: image;
+    height: 6rem;
+  }
+
+  .item__brand {
+    grid-area: brand;
+    font-weight: bold;
+    opacity: 0.6;
+  }
+
+  .item__delete {
+    grid-area: delete;
+    justify-self: end;
+    margin-right: -0.5rem;
+  }
+
+  .item__title {
+    grid-area: title;
+    line-height: 1.375;
+  }
+
+  .item__options {
+    grid-area: options;
+  }
+
+  footer {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.75rem;
   }
 
   @media (min-width: 480px) {
