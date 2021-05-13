@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400");
+
 :root {
   --color-red: #e63946;
   --color-blue-300: #f1faee;
@@ -9,6 +11,65 @@
 
   --color-background: var(--color-white);
   --color-text: var(--color-black);
+}
+
+/* 1.250 - Major Third from type-scale.com */
+html {
+  font-size: 100%;
+} /*16px*/
+
+body {
+  background: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #000000;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 3rem 0 1.38rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+h1,
+.text-4xl {
+  margin-top: 0;
+  font-size: 3.052rem;
+}
+
+h2,
+.text-3xl {
+  font-size: 2.441rem;
+}
+
+h3,
+.text-2xl {
+  font-size: 1.953rem;
+}
+
+h4,
+.text-xl {
+  font-size: 1.563rem;
+}
+
+h5,
+.text-lg {
+  font-size: 1.25rem;
+}
+
+small,
+.text-sm {
+  font-size: 0.8rem;
 }
 
 /* Reduce font for very small phones, ex: iPhone 5 */
@@ -40,6 +101,17 @@ button {
   border: none;
   padding: 0.5em;
   border-radius: 0.25em;
+}
+
+.btn.btn--lg {
+  font-size: 1.25rem;
+  padding: 0.75em 1.25em;
+}
+
+.btn.btn--primary {
+  background: var(--color-blue-700);
+  color: var(--color-blue-300);
+  font-size: ;
 }
 
 .btn.btn--icon svg {

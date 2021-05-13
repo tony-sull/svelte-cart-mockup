@@ -11,7 +11,63 @@
 <NavHeader />
 
 <main>
-  <div class="container">
-    <h1>Hello, World!</h1>
+  <div class="container hero">
+    <h1>Kamfly Clothing Co.</h1>
+    <p>
+      Today's latest styles, locally made with 100% recycled cotton and
+      renewable hemp.
+    </p>
+
+    <button class="btn btn--primary btn--lg">Shop Now</button>
   </div>
+
+  <section class="container alt">
+    <h2>Placeholder content</h2>
+  </section>
+
+  <section class="container">
+    <h2>Placeholder content</h2>
+  </section>
+
+  <section class="container alt">
+    <h2>Placeholder content</h2>
+  </section>
 </main>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero .btn {
+    margin-top: 1em;
+  }
+
+  section {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  section.alt {
+    background: var(--color-blue-300);
+  }
+
+  @media (min-width: 640px) {
+    .hero {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+
+    .hero .btn {
+      margin-top: 3em;
+    }
+  }
+</style>
