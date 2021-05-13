@@ -1,8 +1,11 @@
 import { derived, writable } from 'svelte/store'
+import { addItemToState } from './addItemToState'
 import { getItemsCount } from './getItemsCount'
 import { getTotalPrice } from './getTotalPrice'
+import { removeSkuFromState } from './removeSkuFromState'
+import { setSkuQuantityInState } from './setSkuQuantityInState'
 
-type CartItem = {
+export type CartItem = {
     sku: string
     brand: string
     title: string
@@ -27,31 +30,11 @@ export function createCartStore(initialState: CartState = defaultState()) {
     const { update, set, subscribe } = store
 
     const reset = () => set(defaultState())
-
     const itemsCount = () => derived(store, getItemsCount)
     const totalPrice = () => derived(store, getTotalPrice)
-    const removeSku = (sku: string) => update(state => {
-        return {
-            ...state,
-            items: state.items.filter(item => item.sku !== sku)
-        }
-    })
-    const setSkuQuantity = (sku: string, quantity: number) => update(state => {
-        return {
-            ...state,
-            items: state.items.map(item => {
-                return item.sku === sku
-                    ? { ...item, quantity }
-                    : item
-            })
-        }
-    })
-    const addItem = (item: CartItem) => update(state => {
-        return {
-            ...state,
-            items: state.items.concat(item)
-        }
-    })
+    const removeSku = (sku: string) => update(removeSkuFromState(sku))
+    const setSkuQuantity = (sku: string, quantity: number) => update(setSkuQuantityInState(sku, quantity))
+    const addItem = (item: CartItem) => update(addItemToState(item))
 
     return {
         subscribe,
