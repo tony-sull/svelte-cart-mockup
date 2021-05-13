@@ -3,6 +3,8 @@
   import logo from "../assets/icons/logo.svg";
   import shoppingCart from "../assets/icons/shopping-cart.svg";
 
+  export let cartOpen: boolean;
+
   const dispatch = createEventDispatcher();
 
   function openCart() {
@@ -10,7 +12,7 @@
   }
 </script>
 
-<header class="container">
+<header class="container" aria-hidden={cartOpen}>
   <a href="/" alt="Our Shop">
     {@html logo}
   </a>

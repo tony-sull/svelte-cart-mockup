@@ -19,7 +19,7 @@
   <title>Home | Shop Kamfly</title>
 </svelte:head>
 
-<NavHeader on:opencart={onOpenCart} />
+<NavHeader on:opencart={onOpenCart} {cartOpen} />
 
 <main aria-hidden={cartOpen}>
   <div class="container hero">
