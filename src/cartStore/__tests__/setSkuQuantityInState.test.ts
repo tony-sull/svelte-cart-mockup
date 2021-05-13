@@ -78,4 +78,24 @@ describe('setSkuQuantityInState', () => {
 
         expect(result.items).toEqual(testItems)
     })
+
+    test('should remove a SKU if setting quantity to 0', () => {
+        const state: CartState = {
+            items: testItems
+        }
+
+        const result = setSkuQuantityInState(testItems[0].sku, 0)(state)
+
+        expect(result.items).toEqual([ testItems[1] ])
+    })
+
+    test('should remove a SKU if setting quantity to a negative', () => {
+        const state: CartState = {
+            items: testItems
+        }
+
+        const result = setSkuQuantityInState(testItems[1].sku, -1)(state)
+
+        expect(result.items).toEqual([ testItems[0] ])
+    })
 })
