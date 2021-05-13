@@ -76,6 +76,14 @@
         </button>
       </li>
     </ul>
+
+    <div class="discount">
+      <div class="discount__title text-lg">10% off your order</div>
+      <small class="discount__description">
+        As a first time shopper you get a discount on your first order.
+      </small>
+      <div class="discount__price">-175 SEK</div>
+    </div>
   </main>
 
   <footer>
@@ -188,6 +196,36 @@
   .item__quantity {
     grid-area: quantity;
     margin-top: 0.5rem;
+  }
+
+  .discount {
+    padding: 1rem;
+    margin-top: 2rem;
+    border: solid 2px var(--color-blue-700);
+    border-radius: 0.25rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "title price"
+      "description price";
+  }
+
+  .discount__title {
+    grid-area: title;
+  }
+
+  .discount__description {
+    grid-area: description;
+  }
+
+  .discount__price {
+    grid-area: price;
+  }
+
+  .discount__title,
+  .discount__price {
+    color: var(--color-blue-700);
+    font-weight: bold;
   }
 
   footer {
