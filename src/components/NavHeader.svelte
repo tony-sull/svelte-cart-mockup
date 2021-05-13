@@ -1,13 +1,6 @@
 <script lang="ts">
-  import { cartStore } from "../cartStore";
   import logo from "../assets/icons/logo.svg";
   import shoppingCart from "../assets/icons/shopping-cart.svg";
-
-  const totalItems = cartStore.itemsCount();
-  const totalPrice = cartStore.totalPrice();
-
-  $: console.log($totalItems);
-  $: console.log($totalPrice);
 
   function openCart() {
     console.log("open cart");
