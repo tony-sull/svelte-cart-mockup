@@ -42,153 +42,78 @@ describe('createCartStore', () => {
 })
 
 describe('cartStore.reset', () => {
-    test('should be a function', () => {
-        const { reset } = createCartStore()
-        expect(reset).toBeInstanceOf(Function)
-    })
-
-    test('should not throw for an empty store', () => {
-        const { reset } = createCartStore()
-        expect(() => reset()).not.toThrow()
-    })
-
-    test('should remove all items from the store', () => {
+    test('should update subscribers', () => {
         const store = createCartStore({
             items: testItems
         })
 
+        const mock = jest.fn()
+        const unsubscribe = store.subscribe(mock)
+
         store.reset()
 
-        const state = get(store)
+        expect(mock).toHaveBeenLastCalledWith({
+            items: []
+        })
 
-        expect(state.items).toEqual([])
+        unsubscribe()
     })
 })
 
 describe('cartStore.addItem', () => {
-    test('should be a function', () => {
-        const { addItem } = createCartStore()
-        expect(addItem).toBeInstanceOf(Function)
-    })
-
-    test('should add an item to an empty store', () => {
+    test('should update subscribers', () => {
         const store = createCartStore()
+
+        const mock = jest.fn()
+        const unsubscribe = store.subscribe(mock)
+
         store.addItem(testItems[0])
 
-        const state = get(store)
-
-        expect(state.items).toEqual([testItems[0]])
-    })
-
-    test('should not change existing items', () => {
-        const [ item1, item2 ] = testItems
-        const store = createCartStore({
-            items: [item1]
+        expect(mock).toHaveBeenLastCalledWith({
+            items: [testItems[0]]
         })
 
-        store.addItem(item2)
-
-        const state = get(store)
-
-        expect(state.items).toEqual(testItems)
+        unsubscribe()
     })
 })
 
 describe('cartStore.removeSku', () => {
-    test('should be a function', () => {
-        const { removeSku } = createCartStore()
-        expect(removeSku).toBeInstanceOf(Function)
-    })
-
-    test('should not throw for an empty store', () => {
-        const { removeSku } = createCartStore()
-        expect(() => removeSku(testItems[0].sku)).not.toThrow()
-    })
-
-    test('should remove a known SKU from the cart', () => {
-        const testItem = testItems[0]
-        const store = createCartStore({
-            items: [testItem]
-        })
-
-        store.removeSku(testItem.sku)
-
-        const state = get(store)
-        expect(state.items).toEqual([])
-    })
-
-    test('should not remove other items', () => {
+    test('should update subscribers', () => {
         const store = createCartStore({
             items: testItems
         })
+
+        const mock = jest.fn()
+        const unsubscribe = store.subscribe(mock)
 
         store.removeSku(testItems[1].sku)
 
-        const state = get(store)
-        expect(state.items).toEqual([testItems[0]])
-    })
-
-    test('should ignore unknown SKUs', () => {
-        const store = createCartStore({
-            items: testItems
+        expect(mock).toHaveBeenLastCalledWith({
+            items: [testItems[0]]
         })
 
-        store.removeSku('test-123')
-
-        const state = get(store)
-        expect(state.items).toEqual(testItems)
+        unsubscribe()
     })
 })
 
 describe('cartStore.setSkuQuantity', () => {
-    test('should be a function', () => {
-        const { setSkuQuantity } = createCartStore()
-        expect(setSkuQuantity).toBeInstanceOf(Function)
-    })
-
-    test('should not throw on empty store', () => {
-        const { setSkuQuantity } = createCartStore()
-        expect(() => setSkuQuantity('test-123', 3)).not.toThrow()
-    })
-
-    test('should update a known SKU\'s quantity', () => {
-        const testItem = testItems[0]
-        const store = createCartStore({
-            items: [ testItem ]
-        })
-
-        store.setSkuQuantity(testItem.sku, 10)
-
-        const state = get(store)
-        expect(state.items).toEqual([
-            { ...testItem, quantity: 10 }
-        ])
-    })
-
-    test('should not change other SKUs', () => {
+    test('should update subscribers', () => {
         const store = createCartStore({
             items: testItems
         })
 
-        store.setSkuQuantity(testItems[1].sku, 10)
+        const mock = jest.fn()
+        const unsubscribe = store.subscribe(mock)
 
-        const state = get(store)
-        expect(state.items).toEqual(
-            [
-                testItems[0],
-                { ...testItems[1], quantity: 10 }
+        store.setSkuQuantity(testItems[0].sku, 10)
+
+        expect(mock).toHaveBeenLastCalledWith({
+            items: [
+                { ...testItems[0], quantity: 10 },
+                testItems[1]
             ]
-        )
-    })
-
-    test('should ignore unknown SKUs', () => {
-        const store = createCartStore({
-            items: testItems
         })
 
-        store.setSkuQuantity('test-123', 10)
-
-        const state = get(store)
-        expect(state.items).toEqual(testItems)
+        unsubscribe()
     })
 })
