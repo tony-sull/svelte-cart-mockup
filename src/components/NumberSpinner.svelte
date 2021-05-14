@@ -3,6 +3,7 @@
   export let max = 100;
   export let step = 1;
   export let value = 0;
+  export let label = 'spinbutton';
 
   function onMinus() {
     value = Math.max(min, value - step);
@@ -13,8 +14,8 @@
   }
 </script>
 
-<div class="stepper">
-  <button class="btn btn--icon-sm" on:click={onMinus}>
+<div class="stepper" aria-label={label}>
+  <button class="btn btn--icon-sm" on:click={onMinus} aria-label="minus">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -28,9 +29,9 @@
     </svg>
   </button>
 
-  <strong>{value}</strong>
+  <strong aria-label="value">{value}</strong>
 
-  <button class="btn btn--icon-sm" on:click={onPlus}>
+  <button class="btn btn--icon-sm" on:click={onPlus} aria-label="plus">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
