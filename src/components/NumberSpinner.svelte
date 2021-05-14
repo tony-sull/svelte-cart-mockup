@@ -1,16 +1,26 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
   export let min = 0;
   export let max = 100;
   export let step = 1;
   export let value = 0;
-  export let label = 'spinbutton';
+  export let label = "spinbutton";
+
+  const dispatch = createEventDispatcher();
 
   function onMinus() {
     value = Math.max(min, value - step);
+    onChange();
   }
 
   function onPlus() {
     value = Math.min(max, value + step);
+    onChange();
+  }
+
+  function onChange() {
+    dispatch("change", value);
   }
 </script>
 

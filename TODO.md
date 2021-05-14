@@ -1,5 +1,7 @@
 # NumberSpinner
 
+[ ] Need to add tests for the `change` event
+
 [ ] NumberSpinner isn't setup for proper ARIA accessibility
 
 - [WC3 example](https://w3c.github.io/aria-practices/examples/spinbutton/datepicker-spinbuttons.html)
