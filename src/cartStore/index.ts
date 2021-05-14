@@ -14,13 +14,37 @@ export type CartItem = {
     itemPrice: number
 }
 
+export type PercentDiscount = {
+    title: string
+    description: string
+    discountPercent: number
+}
+
+export type AmountDiscount = {
+    title: string
+    description: string
+    discountAmount: number
+}
+
+export type Discount = PercentDiscount | AmountDiscount
+
+export function isPercentDiscount(discount: Discount): discount is PercentDiscount {
+    return 'discountPercent' in discount
+}
+
+export function isAmountDiscount(discount: Discount): discount is AmountDiscount {
+    return 'discountAmount' in discount
+}
+
 export type CartState = {
-    items: CartItem[]
+    items: CartItem[],
+    discount?: Discount
 }
 
 function defaultState(): CartState {
     return {
-        items: []
+        items: [],
+        discount: undefined
     }
 }
 
