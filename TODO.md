@@ -10,3 +10,5 @@ The component should use a role="spinnbutton". It also may need to hide the plus
 # Discounts
 
 [ ] The cart store's discount system is very basic right now. It can handle percent off or flat amount discounts, but it should be refactored to separate out the logic for removing discount amounts to allow for better reusability with other types of discounts
+
+[ ] cartStore.getDiscountAmount() should handle error cases, for example invalid discounts or discounts with unrecognized types should be ignored
