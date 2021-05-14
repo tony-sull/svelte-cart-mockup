@@ -1,18 +1,27 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
   import logo from "../assets/icons/logo.svg";
   import shoppingCart from "../assets/icons/shopping-cart.svg";
 
+  export let cartOpen: boolean;
+
+  const dispatch = createEventDispatcher();
+
   function openCart() {
-    console.log("open cart");
+    dispatch("opencart");
   }
 </script>
 
-<header class="container">
+<header class="container" aria-hidden={cartOpen}>
   <a href="/" alt="Our Shop">
     {@html logo}
   </a>
 
-  <button aria-label="Open Shopping Cart" on:click={openCart}>
+  <button
+    class="btn btn--icon"
+    aria-label="Open Shopping Cart"
+    on:click={openCart}
+  >
     {@html shoppingCart}
   </button>
 </header>
@@ -41,19 +50,12 @@
 
   button {
     position: relative;
-    background: transparent;
-    border: none;
-    padding: 0.5em;
     margin-right: -0.5em; /* visually align the icon's right edge */
-    will-change: opacity, color;
-    transition: opacity 150ms ease-out, color 150ms ease-out;
+    will-change: color;
+    transition: color 150ms ease-out;
   }
 
   button:hover {
     color: var(--color-blue-700);
-  }
-
-  button :global(svg) {
-    height: 2rem;
   }
 </style>

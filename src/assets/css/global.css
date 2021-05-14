@@ -7,6 +7,8 @@
   --color-blue-700: #457b9d;
   --color-blue-900: #1d3557;
   --color-white: #fff;
+  --color-light-gray: #cecece;
+  --color-gray: #707070;
   --color-black: #000;
 
   --color-background: var(--color-white);
@@ -98,9 +100,9 @@ button {
 
 .btn {
   background: transparent;
-  border: none;
-  padding: 0.5em;
+  border: solid 2px transparent;
   border-radius: 0.25em;
+  padding: 0.5em;
 }
 
 .btn.btn--lg {
@@ -111,11 +113,22 @@ button {
 .btn.btn--primary {
   background: var(--color-blue-700);
   color: var(--color-blue-300);
-  font-size: ;
+}
+
+.btn.btn--hollow {
+  border-color: var(--color-blue-700);
+}
+
+.btn.btn--icon-sm {
+  padding: 0.75em;
 }
 
 .btn.btn--icon svg {
   height: 2em;
+}
+
+.btn.btn--icon-sm svg {
+  height: 1.5em;
 }
 
 @media (min-width: 375px) {
