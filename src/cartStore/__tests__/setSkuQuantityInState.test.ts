@@ -15,7 +15,7 @@ const testItems = [
         brand: 'Test Brand',
         title: 'Undersize Blazer',
         description: 'Black, size: 36',
-        quantity: -3,
+        quantity: 3,
         itemPrice: 60
     }
 ]
