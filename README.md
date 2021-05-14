@@ -1,105 +1,21 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# svelte-cart-mockup
 
----
+A shopping cart UI mocked up in [Svelte](https://svelte.dev).
 
-# svelte app
+See the [TODO](/TODO.md) file for a list of items that could/should be updated with more time.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+## What Didn't Work
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+[SvelteKit](https://kit.svelte.dev)! 😂
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+They recently switched the configuration files from CommonJS to MJS. That makes sense since MJS is now native in Node 15, but it looked like it wasn't full ported over yet. Once I started hooking up the testing environment I was hitting errors related to using `require` in MJS modules. The call stack pointed back to `svelte.config.js` but it was all `import`s, I assume it's using something internal to SvelteKit that was still on CommonJS format.
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+## General Setup
 
+`pnpm dev` to fire out the local dev server
+`pnpm test` to run all tests
+`pnpm build` to run a production build
 
-## Get started
+I started with Svelte's [basic template](https://github.com/sveltejs/template), its a little outdate but after throwing out SvelteKit I didn't want to get stuck behind Sapper in a similar way.
 
-Install the dependencies...
-
-```bash
-cd svelte-app
-npm install
-```
-
-...then start [Rollup](https://rollupjs.org):
-
-```bash
-npm run dev
-```
-
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+Testing is all done with `Jest`, using `@testing-library/svelte` to help with UI testing.
