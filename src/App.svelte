@@ -1,8 +1,44 @@
 <script lang="ts">
   import "sanitize.css";
+  import { setContext } from "svelte";
   import "./assets/css/global.css";
   import NavHeader from "./components/NavHeader.svelte";
   import ShoppingCart from "./components/ShoppingCart.svelte";
+  import { createCartStore } from "./cartStore";
+  import type { CartState } from "./cartStore";
+
+  // initializing the cart with local data
+  const initialCart: CartState = {
+    items: [
+      {
+        sku: "oversized-blazer-bl-36",
+        title: "Oversized Blazer",
+        description: "Black, Size: 36",
+        brand: "Johnells",
+        image: "/products/oversized-blazer.jpg",
+        quantity: 1,
+        itemPrice: 175,
+      },
+      {
+        sku: "sport-coat-br-36",
+        title: "Sport Coat",
+        description: "Brown, Size: 36",
+        brand: "Johnells",
+        image: "/products/oversized-blazer.jpg",
+        quantity: 2,
+        itemPrice: 150,
+      },
+    ],
+    discount: {
+      title: "10% off your order",
+      description:
+        "As a first time shopper you get a discount on your first order.",
+      discountPercent: 10,
+    },
+  };
+
+  const cartStore = createCartStore(initialCart);
+  setContext("cartStore", cartStore);
 
   let cartOpen = false;
 

@@ -1,8 +1,13 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, getContext } from "svelte";
   import { fade, fly } from "svelte/transition";
   import NumberSpinner from "./NumberSpinner.svelte";
   import { modalAction } from "../actions/modalAction";
+  import type { CartStore, isAmountDiscount } from "../cartStore";
+
+  const cartStore = getContext<CartStore>("cartStore");
+  const totalPrice = cartStore.totalPrice();
+  const discountAmount = cartStore.discountAmount();
 
   const originalFocusElem = document.activeElement;
 
@@ -12,6 +17,12 @@
 
   function onClose() {
     dispatch("close");
+  }
+
+  function onNumberSpinnerChange(sku: string) {
+    return function (event: CustomEvent<number>) {
+      cartStore.setSkuQuantity(sku, event.detail);
+    };
   }
 </script>
 
@@ -26,7 +37,12 @@
 >
   <header>
     <h1 id="cart-title" class="text-lg">Shopping Cart</h1>
-    <button class="btn btn--icon" on:click={onClose} aria-label="Close" autofocus>
+    <button
+      class="btn btn--icon"
+      on:click={onClose}
+      aria-label="Close"
+      autofocus
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -41,166 +57,65 @@
   </header>
   <main>
     <ul>
-      <li class="item">
-        <img
-          class="item__image"
-          src="/products/oversized-blazer.jpg"
-          alt="Oversized Blazer"
-        />
-        <small class="item__brand">Johnells</small>
-        <div class="item__title text-lg">Oversized Blazer</div>
-        <em class="item__options text-sm">Black, Size: 36</em>
-        <div class="item__quantity">
-          <NumberSpinner value={1} />
-        </div>
-        <div class="item__price">1750 SEK</div>
-
-        <button class="item__delete btn btn--icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-trash-2"
-          >
-            <polyline points="3 6 5 6 21 6" />
-            <path
-              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+      {#each $cartStore.items as item (item.sku)}
+        <li class="item">
+          {#if item.image}
+            <img class="item__image" src={item.image} alt={item.title} />
+          {/if}
+          <small class="item__brand">{item.brand}</small>
+          <div class="item__title text-lg">{item.title}</div>
+          <em class="item__options text-sm">{item.description}</em>
+          <div class="item__quantity">
+            <NumberSpinner
+              value={item.quantity}
+              on:change={onNumberSpinnerChange(item.sku)}
             />
-            <line x1="10" y1="11" x2="10" y2="17" />
-            <line x1="14" y1="11" x2="14" y2="17" />
-          </svg>
-        </button>
-      </li>
+          </div>
+          <div class="item__price">{item.quantity * item.itemPrice} SEK</div>
 
-      <li class="item">
-        <img
-          class="item__image"
-          src="/products/oversized-blazer.jpg"
-          alt="Oversized Blazer"
-        />
-        <small class="item__brand">Johnells</small>
-        <div class="item__title text-lg">Oversized Blazer</div>
-        <em class="item__options text-sm">Black, Size: 36</em>
-        <div class="item__quantity">
-          <NumberSpinner value={1} />
-        </div>
-        <div class="item__price">1750 SEK</div>
-
-        <button class="item__delete btn btn--icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-trash-2"
+          <button
+            class="item__delete btn btn--icon"
+            on:click={() => cartStore.removeSku(item.sku)}
           >
-            <polyline points="3 6 5 6 21 6" />
-            <path
-              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-            />
-            <line x1="10" y1="11" x2="10" y2="17" />
-            <line x1="14" y1="11" x2="14" y2="17" />
-          </svg>
-        </button>
-      </li>
-      <li class="item">
-        <img
-          class="item__image"
-          src="/products/oversized-blazer.jpg"
-          alt="Oversized Blazer"
-        />
-        <small class="item__brand">Johnells</small>
-        <div class="item__title text-lg">Oversized Blazer</div>
-        <em class="item__options text-sm">Black, Size: 36</em>
-        <div class="item__quantity">
-          <NumberSpinner value={1} />
-        </div>
-        <div class="item__price">1750 SEK</div>
-
-        <button class="item__delete btn btn--icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-trash-2"
-          >
-            <polyline points="3 6 5 6 21 6" />
-            <path
-              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-            />
-            <line x1="10" y1="11" x2="10" y2="17" />
-            <line x1="14" y1="11" x2="14" y2="17" />
-          </svg>
-        </button>
-      </li>
-      <li class="item">
-        <img
-          class="item__image"
-          src="/products/oversized-blazer.jpg"
-          alt="Oversized Blazer"
-        />
-        <small class="item__brand">Johnells</small>
-        <div class="item__title text-lg">Oversized Blazer</div>
-        <em class="item__options text-sm">Black, Size: 36</em>
-        <div class="item__quantity">
-          <NumberSpinner value={1} />
-        </div>
-        <div class="item__price">1750 SEK</div>
-
-        <button class="item__delete btn btn--icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-trash-2"
-          >
-            <polyline points="3 6 5 6 21 6" />
-            <path
-              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-            />
-            <line x1="10" y1="11" x2="10" y2="17" />
-            <line x1="14" y1="11" x2="14" y2="17" />
-          </svg>
-        </button>
-      </li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-trash-2"
+            >
+              <polyline points="3 6 5 6 21 6" />
+              <path
+                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+              />
+              <line x1="10" y1="11" x2="10" y2="17" />
+              <line x1="14" y1="11" x2="14" y2="17" />
+            </svg>
+          </button>
+        </li>
+      {/each}
     </ul>
 
-    <div class="discount">
-      <div class="discount__title text-lg">10% off your order</div>
-      <small class="discount__description">
-        As a first time shopper you get a discount on your first order.
-      </small>
-      <div class="discount__price">-175 SEK</div>
-    </div>
+    {#if $discountAmount > 0}
+      <div class="discount">
+        <div class="discount__title text-lg">{$cartStore.discount.title}</div>
+        <small class="discount__description">
+          {$cartStore.discount.description}
+        </small>
+        <div class="discount__price">-{$discountAmount} SEK</div>
+      </div>
+    {/if}
   </main>
 
   <footer>
     <div class="footer__row">
       <span>Total</span>
-      <span>1750 SEK</span>
+      <span>{$totalPrice} SEK</span>
     </div>
     <button class="btn btn--primary btn--lg">Checkout</button>
     <button class="btn btn--hollow btn--lg" on:click={onClose}
