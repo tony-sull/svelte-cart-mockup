@@ -1,5 +1,13 @@
 export type ModalActionOptions = {
-    close: () => void
+    close: () => void,
+    focusElem?: Element,
+    originalFocusElem?: Element
+}
+
+function focusOnElement(elem?: Element) {
+    if (elem instanceof HTMLElement) {
+        elem.focus()
+    }
 }
 
 export function modalAction(node: HTMLElement, options?: ModalActionOptions) {
@@ -13,20 +21,21 @@ export function modalAction(node: HTMLElement, options?: ModalActionOptions) {
     }
     
     function onKeyDown(e: KeyboardEvent) {
-        e.stopPropagation()
         if (e.key === 'Escape' && options?.close) {
             options.close()
+            e.stopPropagation()
         }
     }
 
     node.addEventListener('transitionend', onTransitionEnd)
     node.addEventListener('keydown', onKeyDown)
 
-    node.focus()
+    focusOnElement(options?.focusElem)
 
     return {
         destroy: () => {
             document.body.style.overflow = originalOverflow
+            focusOnElement(options.originalFocusElem)
             node.removeEventListener('transitionend', onTransitionEnd)
             node.removeEventListener('keydown', onKeyDown)
         }

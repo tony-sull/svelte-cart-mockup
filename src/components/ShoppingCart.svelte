@@ -4,6 +4,8 @@
   import NumberSpinner from "./NumberSpinner.svelte";
   import { modalAction } from "../actions/modalAction";
 
+  const originalFocusElem = document.activeElement;
+
   const dispatch = createEventDispatcher();
 
   let clientWidth: number;
@@ -17,14 +19,14 @@
 <aside
   role="dialog"
   class="container"
-  use:modalAction
+  use:modalAction={{ close: onClose, originalFocusElem }}
   aria-labelledby="cart-title"
   transition:fly={{ duration: 250, x: clientWidth }}
   bind:clientWidth
 >
   <header>
     <h1 id="cart-title" class="text-lg">Shopping Cart</h1>
-    <button class="btn btn--icon" on:click={onClose}>
+    <button class="btn btn--icon" on:click={onClose} aria-label="Close" autofocus>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
