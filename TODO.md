@@ -36,3 +36,7 @@ Public APIs for the cart store and helper functions need to be documented. I pre
 [ ] Can custom Svelte actions be tested easily? I've never actually tried it out, that would be very useful coverage to have but tricky with all the DOM integration
 
 [ ] The testing here could be cleaned up, especially around how test data is created, maybe helpers that take in `Partial<T>` state for different `type`s and return a valid object with any undefined data filled in with generic data
+
+# Extract Shared Types
+
+[ ] Shared typescript types currently in [cartStore](/cartStore/index.ts) should be pulled out to a shared file or .d.ts file
