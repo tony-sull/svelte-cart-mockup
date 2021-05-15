@@ -2,7 +2,7 @@
 
 A shopping cart UI mocked up in [Svelte](https://svelte.dev).
 
-A live demo of the current build is hosted on [Netlify](https://svelte-cart-mockup.netlify.app/)
+A [live demo](https://svelte-cart-mockup.netlify.app/) of the current build is hosted on Netlify
 
 See the [TODO](/TODO.md) file for a list of items that could/should be updated with more time.
 
