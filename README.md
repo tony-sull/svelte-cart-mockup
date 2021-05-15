@@ -2,6 +2,8 @@
 
 A shopping cart UI mocked up in [Svelte](https://svelte.dev).
 
+A live demo of the current build is hosted on [Netlify](https://svelte-cart-mockup.netlify.app/)
+
 See the [TODO](/TODO.md) file for a list of items that could/should be updated with more time.
 
 ## What Didn't Work
